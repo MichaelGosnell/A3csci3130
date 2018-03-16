@@ -1,5 +1,14 @@
 package com.acme.a3csci3130;
 
+/**
+ * Displays list of stored businesses, allows adding news one and editing/erasing old ones
+ * @author michael
+ * @see com.acme.a3csci3130.CreateContactAcitivity to create new buisnesses
+ * @see com.acme.a3csci3130.DetailViewActivity to edit current buisnesses
+ * All button names directly reflect name in UI and function
+ * All text fields directly reflect name in UI and function
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

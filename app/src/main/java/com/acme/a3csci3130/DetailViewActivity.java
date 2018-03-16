@@ -1,5 +1,14 @@
 package com.acme.a3csci3130;
 
+/**
+ * Displays already existing details of selected business
+ * @author michael
+ * @see CreateContactAcitivity for origin of buisnesses
+ * @see MainActivity for only user path this this activity
+ * All buttons names directly reflect name in UI and function
+ * All text fields directly reflect name in UI and function
+ */
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
