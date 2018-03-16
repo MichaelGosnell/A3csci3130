@@ -8,8 +8,10 @@ import android.widget.EditText;
 
 public class DetailViewActivity extends Activity {
 
-    private Button updateContactButton, eraseButton;
+    private Button updateButton, eraseButton;
     private EditText numberField, nameField, primaryBuisnessField, addressField, provinceField;
+    private String personID;
+    private MyApplicationData appState;
     Contact receivedPersonInfo;
 
     @Override
@@ -18,31 +20,50 @@ public class DetailViewActivity extends Activity {
         setContentView(R.layout.activity_detail_view);
         receivedPersonInfo = (Contact)getIntent().getSerializableExtra("Contact");
 
-        numberField = (EditText) findViewById(R.id.number);
+        personID = receivedPersonInfo.uid;
+
+        //Get the app wide shared variables
+        appState = ((MyApplicationData) getApplicationContext());
+
         nameField = (EditText) findViewById(R.id.name);
+        numberField = (EditText) findViewById(R.id.number);
         primaryBuisnessField = (EditText) findViewById(R.id.primaryBuisness);
-        addressField = (EditText) findViewById(R.id.primaryBuisness);
         addressField = (EditText) findViewById(R.id.address);
         provinceField = (EditText) findViewById(R.id.province);
 
+        updateButton = (Button) findViewById(R.id.updateButton);
+        eraseButton = (Button) findViewById(R.id.deleteButton);
 
-
-        submitButton = (Button) findViewById(R.id.submitButton);
-
-        updateContactButton = (Button) findViewById(R.id.submitButton);
 
         if(receivedPersonInfo != null){
             nameField.setText(receivedPersonInfo.name);
-            emailField.setText(receivedPersonInfo.number;
+            numberField.setText(receivedPersonInfo.number);
+            primaryBuisnessField.setText(receivedPersonInfo.primaryBuisness);
+            addressField.setText(receivedPersonInfo.address);
+            primaryBuisnessField.setText(receivedPersonInfo.province);
+            provinceField.setText(receivedPersonInfo.province);
         }
     }
 
     public void updateContact(View v){
-        //TODO: Update contact funcionality
+        String name = nameField.getText().toString();
+        String number = numberField.getText().toString();
+        String primaryBuisness = primaryBuisnessField.getText().toString();
+        String address = addressField.getText().toString();
+        String province = provinceField.getText().toString();
+
+        Contact person = new Contact(personID, name, number, primaryBuisness, address, province);
+
+        appState.firebaseReference.child(personID).setValue(person);
+
+        //leave activity
+        finish();
     }
 
-    public void eraseContact(View v)
-    {
-        //TODO: Erase contact functionality
+    public void eraseContact(View v) {
+        appState.firebaseReference.child(personID).removeValue();
+
+        //leave activity
+        finish();
     }
 }
