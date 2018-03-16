@@ -3,7 +3,7 @@ package com.acme.a3csci3130;
 /**
  * Displays list of stored businesses, allows adding news one and editing/erasing old ones
  * @author michael
- * @see com.acme.a3csci3130.CreateContactAcitivity to create new buisnesses
+ * @see com.acme.a3csci3130.CreateBuisnessAcitivity to create new buisnesses
  * @see com.acme.a3csci3130.DetailViewActivity to edit current buisnesses
  * All button names directly reflect name in UI and function
  * All text fields directly reflect name in UI and function
@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 
 
     private ListView contactListView;
-    private FirebaseListAdapter<Contact> firebaseAdapter;
+    private FirebaseListAdapter<Buisness> firebaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +36,16 @@ public class MainActivity extends Activity {
 
         //Set-up Firebase
         appData.firebaseDBInstance = FirebaseDatabase.getInstance();
-        appData.firebaseReference = appData.firebaseDBInstance.getReference("contacts");
+        appData.firebaseReference = appData.firebaseDBInstance.getReference("buisnesses");
 
         //Get the reference to the UI contents
         contactListView = (ListView) findViewById(R.id.listView);
 
         //Set up the List View
-       firebaseAdapter = new FirebaseListAdapter<Contact>(this, Contact.class,
+       firebaseAdapter = new FirebaseListAdapter<Buisness>(this, Buisness.class,
                 android.R.layout.simple_list_item_1, appData.firebaseReference) {
             @Override
-            protected void populateView(View v, Contact model, int position) {
+            protected void populateView(View v, Buisness model, int position) {
                 TextView contactName = (TextView)v.findViewById(android.R.id.text1);
                 contactName.setText(model.name);
             }
@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
             // onItemClick method is called everytime a user clicks an item on the list
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Contact person = (Contact) firebaseAdapter.getItem(position);
+                Buisness person = (Buisness) firebaseAdapter.getItem(position);
                 showDetailView(person);
             }
         });
@@ -63,11 +63,11 @@ public class MainActivity extends Activity {
 
     public void createContactButton(View v)
     {
-        Intent intent=new Intent(this, CreateContactAcitivity.class);
+        Intent intent=new Intent(this, CreateBuisnessAcitivity.class);
         startActivity(intent);
     }
 
-    private void showDetailView(Contact person)
+    private void showDetailView(Buisness person)
     {
         Intent intent = new Intent(this, DetailViewActivity.class);
         intent.putExtra("Contact", person);

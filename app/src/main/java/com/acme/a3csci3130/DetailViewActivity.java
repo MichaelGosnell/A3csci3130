@@ -21,13 +21,13 @@ public class DetailViewActivity extends Activity {
     private EditText numberField, nameField, primaryBuisnessField, addressField, provinceField;
     private String personID;
     private MyApplicationData appState;
-    Contact receivedPersonInfo;
+    Buisness receivedPersonInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
-        receivedPersonInfo = (Contact)getIntent().getSerializableExtra("Contact");
+        receivedPersonInfo = (Buisness)getIntent().getSerializableExtra("Contact");
 
         personID = receivedPersonInfo.uid;
 
@@ -61,7 +61,7 @@ public class DetailViewActivity extends Activity {
         String address = addressField.getText().toString();
         String province = provinceField.getText().toString();
 
-        Contact person = new Contact(personID, name, number, primaryBuisness, address, province);
+        Buisness person = new Buisness(personID, name, number, primaryBuisness, address, province);
 
         appState.firebaseReference.child(personID).setValue(person);
 

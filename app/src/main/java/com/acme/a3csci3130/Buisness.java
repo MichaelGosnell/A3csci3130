@@ -12,7 +12,7 @@ import java.util.Map;
  * Firebase databse. This is converted to a JSON format
  */
 
-public class Contact implements Serializable {
+public class Buisness implements Serializable {
 
     public  String uid;
     public  String number;
@@ -21,11 +21,11 @@ public class Contact implements Serializable {
     public  String address;
     public  String province;
 
-    public Contact() {
+    public Buisness() {
         // Default constructor required for calls to DataSnapshot.getValue
     }
 
-    public Contact(String uid, String name, String number, String primaryBuisness, String address, String province){
+    public Buisness(String uid, String name, String number, String primaryBuisness, String address, String province){
         this.uid = uid;
         this.name = name;
         this.number = number;
